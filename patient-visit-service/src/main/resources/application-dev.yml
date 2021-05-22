@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: 'jdbc:oracle:thin:@127.0.0.1:1521:orcl'
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: PATIENT_DB
+    password: 14292
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: validate
