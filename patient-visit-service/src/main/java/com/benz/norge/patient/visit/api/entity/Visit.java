@@ -20,8 +20,8 @@ public class Visit {
     private String visitedId;
     @Column(name = "REASON",nullable = false)
     private String reason;
-    @Column(name = "VISITED_DATE_TIME",nullable = false)
-    private String visitedDateTime;
+    @Column(name = "VISIT_DATE_TIME",nullable = false)
+    private String visitDateTime;
     @Column(name = "CREATED_BY",nullable = false)
     private String createdBy;
     @Column(name = "MODIFIED_BY")

@@ -1,9 +1,12 @@
 package com.benz.norge.patient.visit.api.service.impl;
 
+import com.benz.norge.patient.visit.api.dao.HolidayDao;
 import com.benz.norge.patient.visit.api.dao.VisitDao;
+import com.benz.norge.patient.visit.api.entity.Holiday;
 import com.benz.norge.patient.visit.api.entity.Visit;
 import com.benz.norge.patient.visit.api.exception.DataNotFoundException;
 import com.benz.norge.patient.visit.api.exception.ExistedException;
+import com.benz.norge.patient.visit.api.exception.HolidayException;
 import com.benz.norge.patient.visit.api.service.VisitService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,9 +24,11 @@ public class VisitServiceImpl implements VisitService {
     final private static Logger LOGGER= LogManager.getLogger(VisitServiceImpl.class);
 
     private VisitDao visitDao;
+    private HolidayDao holidayDao;
 
-    public VisitServiceImpl(VisitDao visitDao){
+    public VisitServiceImpl(VisitDao visitDao,HolidayDao holidayDao){
         this.visitDao=visitDao;
+        this.holidayDao=holidayDao;
     }
 
     @Override
@@ -33,6 +38,13 @@ public class VisitServiceImpl implements VisitService {
         if(Objects.nonNull(s_visit)){
             LOGGER.error(String.format("visit is existed with %s",s_visit.getVisitedId()));
             throw new ExistedException(String.format("visit is existed with %s",s_visit.getVisitedId()));
+        }
+
+        Holiday isHoliday = holidayDao.findById(visit.getVisitDateTime()).orElse(null);
+        if(Objects.nonNull(isHoliday))
+        {
+            LOGGER.error(String.format("%s is a holiday",isHoliday.getHolidayDate()));
+            throw new HolidayException(String.format("%s is a holiday",isHoliday.getHolidayDate()));
         }
 
             visit.setCreatedDateTime(LocalDateTime.ofInstant(new Date().toInstant(), ZoneId.systemDefault()));
@@ -64,7 +76,15 @@ public class VisitServiceImpl implements VisitService {
 
         Visit u_visit =visitDao.findById(visitedId).orElseThrow(()-> new DataNotFoundException(String.format("visit is not found with %s",visitedId)));
 
+        Holiday isHoliday = holidayDao.findById(visit.getVisitDateTime()).orElse(null);
+        if(Objects.nonNull(isHoliday))
+        {
+            LOGGER.error(String.format("%s is a holiday",isHoliday.getHolidayDate()));
+            throw new HolidayException(String.format("%s is a holiday",isHoliday.getHolidayDate()));
+        }
+
         u_visit.setReason(visit.getReason());
+        u_visit.setVisitDateTime(visit.getVisitDateTime());
         u_visit.setModifiedBy(visit.getModifiedBy());
         u_visit.setModifiedDateTime(LocalDateTime.ofInstant(new Date().toInstant(),ZoneId.systemDefault()));
 

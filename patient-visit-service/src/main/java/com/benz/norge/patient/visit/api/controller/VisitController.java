@@ -22,7 +22,7 @@ public class VisitController {
 
     @PostMapping(value = "/save",produces = {MediaType.APPLICATION_JSON_VALUE},consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Visit> saveVisit(@RequestBody Visit visit){
-        return (visit.getVisitedId().trim().isEmpty() && visit.getReason().trim().isEmpty() && visit.getVisitedDateTime().trim().isEmpty()
+        return (visit.getVisitedId().trim().isEmpty() && visit.getReason().trim().isEmpty() && visit.getVisitDateTime().trim().isEmpty()
         && visit.getPatient().getPatientId().trim().isEmpty() && visit.getPatient().getPatientName().trim().isEmpty() &&
                 visit.getPhysician().getRegNo().trim().isEmpty() && visit.getPhysician().getName().trim().isEmpty()) ?
                 new ResponseEntity<>(HttpStatus.BAD_REQUEST) :

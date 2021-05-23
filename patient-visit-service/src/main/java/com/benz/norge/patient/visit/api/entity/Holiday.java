@@ -5,10 +5,11 @@ import com.benz.norge.patient.visit.api.db.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "HOLIDAY",schema = Schema.PATIENT_DB)
@@ -18,7 +19,7 @@ public class Holiday {
 
     @Id
     @Column(name = "HOLIDAY_DATE")
-    private Date holidayDate;
+    private String holidayDate;
     @Column(name = "HOLIDAY_NAME",nullable = false)
     private String holidayName;
     @Column(name = "CREATED_BY",nullable = false)
