@@ -1,8 +1,0 @@
-server:
-  port: 9091
-
-spring:
-  application:
-    name: billing-service
-  profiles:
-    active: dev
