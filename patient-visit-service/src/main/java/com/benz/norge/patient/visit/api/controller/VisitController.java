@@ -51,6 +51,6 @@ public class VisitController {
     public void deleteVisit(@PathVariable("id") String visitedId){
         if(visitedId.trim().isEmpty())
             throw new IllegalArgumentException("visitedId is required");
-        visitService.deleteVisit(visitedId)
+        visitService.deleteVisit(visitedId);
     }
 }
