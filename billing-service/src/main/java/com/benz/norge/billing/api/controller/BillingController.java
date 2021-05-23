@@ -1,6 +1,7 @@
 package com.benz.norge.billing.api.controller;
 
 import com.benz.norge.billing.api.entity.Billing;
+import com.benz.norge.billing.api.model.Payment;
 import com.benz.norge.billing.api.service.BillingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,9 +19,9 @@ public class BillingController {
         this.billingService=billingService;
     }
 
-    @PostMapping(value = "/pay/{id}",produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Billing> makePayment(@PathVariable("id") String visitedId){
-        return visitedId.trim().isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) :
-                new ResponseEntity<>(billingService.makePayment(visitedId),HttpStatus.OK);
+    @PostMapping(value = "/pay",produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<Payment> makePayment(@RequestBody Payment payment){
+        return payment.getVisitedId().trim().isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) :
+                new ResponseEntity<>(billingService.makePayment(payment),HttpStatus.OK);
     }
 }

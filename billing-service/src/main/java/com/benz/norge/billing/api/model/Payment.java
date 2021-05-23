@@ -1,4 +1,4 @@
-package com.benz.norge.patient.visit.api.model;
+package com.benz.norge.billing.api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
