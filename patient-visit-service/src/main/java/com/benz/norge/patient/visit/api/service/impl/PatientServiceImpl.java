@@ -3,7 +3,7 @@ package com.benz.norge.patient.visit.api.service.impl;
 import com.benz.norge.patient.visit.api.dao.PatientDao;
 import com.benz.norge.patient.visit.api.entity.Patient;
 import com.benz.norge.patient.visit.api.exception.DataNotFoundException;
-import com.benz.norge.patient.visit.api.exception.PatientExistedException;
+import com.benz.norge.patient.visit.api.exception.ExistedException;
 import com.benz.norge.patient.visit.api.service.PatientService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +32,7 @@ public class PatientServiceImpl implements PatientService {
 
          if(Objects.nonNull(n_pat)){
              LOGGER.error(String.format("Patient is existed with %s",n_pat.getPatientId()));
-             throw new PatientExistedException(String.format("Patient is existed with %s",n_pat.getPatientId()));
+             throw new ExistedException(String.format("Patient is existed with %s",n_pat.getPatientId()));
          }
 
          patient.setCreatedDateTime(LocalDateTime.ofInstant(new Date().toInstant(),ZoneId.systemDefault()));
@@ -55,6 +55,7 @@ public class PatientServiceImpl implements PatientService {
             LOGGER.error("No Patient(s) Available in DB");
             throw new DataNotFoundException("No Patient(s) Available in DB");
         }
+        LOGGER.info("retrieve all the patients");
         return patients;
     }
 
@@ -66,7 +67,6 @@ public class PatientServiceImpl implements PatientService {
         u_patient.setPatientName(patient.getPatientName());
         u_patient.setGender(patient.getGender());
         u_patient.setAge(patient.getAge());
-        u_patient.setCreatedBy(patient.getCreatedBy());
         u_patient.setModifiedDateTime(LocalDateTime.ofInstant(new Date().toInstant(),ZoneId.systemDefault()));
 
         LOGGER.info(String.format("Patient has been updated with %s",u_patient.getPatientId()));

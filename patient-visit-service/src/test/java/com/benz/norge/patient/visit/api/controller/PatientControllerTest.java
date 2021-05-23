@@ -91,7 +91,7 @@ public class PatientControllerTest {
 
         Mockito.when(patientService.updatePatient(Mockito.any(String.class),Mockito.any(Patient.class))).thenReturn(getPatient_2());
 
-        MvcResult result=mockMvc.perform(put("/patient/update/{id}",patientId).contentType(MediaType.APPLICATION_JSON_VALUE).content(expectedPatient))
+        MvcResult result=mockMvc.perform(put("/patient/{id}",patientId).contentType(MediaType.APPLICATION_JSON_VALUE).content(expectedPatient))
                 .andExpect(status().isCreated()).andReturn();
 
         int actualStatus=result.getResponse().getStatus();
@@ -106,7 +106,7 @@ public class PatientControllerTest {
 
         String patientId="COL9834";
 
-        MvcResult result=mockMvc.perform(delete("/patient/delete/{id}",patientId))
+        MvcResult result=mockMvc.perform(delete("/patient/{id}",patientId))
                 .andExpect(status().isOk()).andReturn();
 
         int actualStatus=result.getResponse().getStatus();

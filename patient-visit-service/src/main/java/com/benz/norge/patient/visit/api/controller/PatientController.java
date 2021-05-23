@@ -39,13 +39,13 @@ public class PatientController {
         return ResponseEntity.ok(patientService.getPatients());
     }
 
-    @PutMapping(value = "/update/{id}",produces = {MediaType.APPLICATION_JSON_VALUE},consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @PutMapping(value = "/{id}",produces = {MediaType.APPLICATION_JSON_VALUE},consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Patient> updatePatient(@PathVariable("id") String patientId,@RequestBody Patient patient){
         return patientId.trim().isEmpty() ? new ResponseEntity<>(HttpStatus.BAD_REQUEST) :
                 new ResponseEntity<>(patientService.updatePatient(patientId,patient),HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deletePatient(@PathVariable("id") String patientId){
         if(patientId.trim().isEmpty())
             throw new IllegalArgumentException("patient is required");

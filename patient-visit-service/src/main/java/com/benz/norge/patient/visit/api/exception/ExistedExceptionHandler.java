@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class PatientExistedExceptionHandler {
+public class ExistedExceptionHandler {
 
-    @ExceptionHandler(PatientExistedException.class)
-    public ResponseEntity<ErrorMessage> toResponse(PatientExistedException ex){
+    @ExceptionHandler(ExistedException.class)
+    public ResponseEntity<ErrorMessage> toResponse(ExistedException ex){
         ErrorMessage errorMessage=new ErrorMessage(HttpStatus.CONFLICT.value(),ex.getMessage(),"www.benz.com");
         return new ResponseEntity<>(errorMessage,HttpStatus.CONFLICT);
     }

@@ -9,28 +9,27 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "PATIENT",schema = Schema.PATIENT_DB)
+@Table(name = "PHYSICIAN",schema = Schema.PATIENT_DB)
 @Getter
 @Setter
-public class Patient {
+public class Physician {
 
     @Id
-    @Column(name = "PATIENT_ID")
-    private String patientId;
-    @Column(name = "PATIENT_NAME",nullable = false)
-    private String patientName;
-    @Column(name = "GENDER",nullable = false)
-    private String gender;
-    @Column(name = "AGE",nullable = false)
-    private int age;
+    @Column(name = "REG_NO")
+    private String regNo;
+    @Column(name = "NAME",nullable = false)
+    private String name;
     @Column(name = "CREATED_BY",nullable = false)
     private String createdBy;
+    @Column(name = "MODIFIED_BY")
+    private String modifiedBy;
     @Column(name = "CREATED_DATE_TIME")
     private LocalDateTime createdDateTime;
     @Column(name = "MODIFIED_DATE_TIME")
     private LocalDateTime modifiedDateTime;
 
-   /* bi-directional
-   @OneToMany(cascade = CascadeType.ALL,mappedBy = "patient")
+   /*  bi-directional
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "physician")
     private List<Visit> visits;*/
+
 }
