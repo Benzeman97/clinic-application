@@ -10,3 +10,10 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: validate
+
+
+billing:
+  service:
+       url: 'http://${billing.service.host}:${billing.service.port}/billing/pay'
+       host: 127.0.0.1
+       port: 9091

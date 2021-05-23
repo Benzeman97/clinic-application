@@ -7,11 +7,17 @@ import com.benz.norge.patient.visit.api.entity.Visit;
 import com.benz.norge.patient.visit.api.exception.DataNotFoundException;
 import com.benz.norge.patient.visit.api.exception.ExistedException;
 import com.benz.norge.patient.visit.api.exception.HolidayException;
+import com.benz.norge.patient.visit.api.model.Payment;
 import com.benz.norge.patient.visit.api.service.VisitService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -25,10 +31,15 @@ public class VisitServiceImpl implements VisitService {
 
     private VisitDao visitDao;
     private HolidayDao holidayDao;
+    private RestTemplate restTemplate;
 
-    public VisitServiceImpl(VisitDao visitDao,HolidayDao holidayDao){
+    @Value("${billing.service.url}")
+    private String url;
+
+    public VisitServiceImpl(VisitDao visitDao,HolidayDao holidayDao,RestTemplate restTemplate){
         this.visitDao=visitDao;
         this.holidayDao=holidayDao;
+        this.restTemplate=restTemplate;
     }
 
     @Override
@@ -97,5 +108,28 @@ public class VisitServiceImpl implements VisitService {
         Visit visit =visitDao.findById(visitedId).orElseThrow(()-> new DataNotFoundException(String.format("visit is not found with %s",visitedId)));
         LOGGER.info(String.format("visit has been deleted with %s",visitedId));
         visitDao.delete(visit);
+    }
+
+    @Override
+    public Payment makePayment(Payment payment) throws Exception {
+        Visit visit=visitDao.findById(payment.getVisitedId()).orElseThrow(()->new DataNotFoundException(String.format("visit is not found with %s",payment.getVisitedId())));
+        URI uri=new URI(url);
+
+        HttpHeaders httpHeaders=new HttpHeaders();
+        httpHeaders.set("Content-Type","application/json");
+        httpHeaders.set("Accept","application/json");
+
+        HttpEntity<Payment> request=new HttpEntity<>(payment,httpHeaders);
+
+        Payment response = restTemplate.postForEntity(uri,request,Payment.class).getBody();
+
+        payment.setId(response.getId());
+        payment.setDate(response.getDate());
+        payment.setVisitedId(response.getVisitedId());
+        payment.setPatientName(visit.getPatient().getPatientName());
+        payment.setPhysicianName(visit.getPhysician().getName());
+
+        LOGGER.info(String.format("payment transaction is done with %d",response.getId()));
+        return payment;
     }
 }

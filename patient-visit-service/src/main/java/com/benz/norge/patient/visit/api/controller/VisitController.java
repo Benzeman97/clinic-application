@@ -1,6 +1,7 @@
 package com.benz.norge.patient.visit.api.controller;
 
 import com.benz.norge.patient.visit.api.entity.Visit;
+import com.benz.norge.patient.visit.api.model.Payment;
 import com.benz.norge.patient.visit.api.service.VisitService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -52,5 +53,12 @@ public class VisitController {
         if(visitedId.trim().isEmpty())
             throw new IllegalArgumentException("visitedId is required");
         visitService.deleteVisit(visitedId);
+    }
+
+    @PostMapping(value = "/payment",produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<Payment> makePayment(@RequestBody Payment payment) throws Exception {
+        return payment.getVisitedId().trim().isEmpty() ?
+                new ResponseEntity<>(HttpStatus.BAD_REQUEST) :
+                new ResponseEntity<>(visitService.makePayment(payment),HttpStatus.OK);
     }
 }
