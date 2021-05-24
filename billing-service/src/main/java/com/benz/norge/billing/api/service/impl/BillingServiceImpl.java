@@ -3,6 +3,7 @@ package com.benz.norge.billing.api.service.impl;
 import com.benz.norge.billing.api.dao.BillingDao;
 import com.benz.norge.billing.api.entity.Billing;
 import com.benz.norge.billing.api.model.Payment;
+import com.benz.norge.billing.api.repository.BillingMonoDao;
 import com.benz.norge.billing.api.service.BillingService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,9 +20,11 @@ public class BillingServiceImpl implements BillingService {
     final private static Logger LOGGER = LogManager.getLogger(BillingServiceImpl.class);
 
     private BillingDao billingDao;
+    private BillingMonoDao billingMonoDao;
 
-    public BillingServiceImpl(BillingDao billingDao){
+    public BillingServiceImpl(BillingDao billingDao,BillingMonoDao billingMonoDao){
         this.billingDao=billingDao;
+        this.billingMonoDao=billingMonoDao;
     }
 
     @Override

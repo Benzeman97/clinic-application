@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  billing-service:
+    image: billing-service:1.0
+    container_name: billing_service
+    ports:
+    - 9091:9091
+    restart: on-failure
+    networks:
+      - billing-mysql
+    depends_on:
+      - mysql-db
+    links:
+      - mysql-db
+  mysql-db:
+    image: mysql-db:8
+    container_name: mysql-db
+    ports:
+    - 3306:3306
+    networks:
+      - billing-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD = *****
+      - MYSQL_DATABASE = billing_db
+      - MYSQL_USER = patient_db
+
+networks:
+  - billing-mysql
