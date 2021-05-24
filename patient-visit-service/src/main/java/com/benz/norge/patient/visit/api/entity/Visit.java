@@ -3,7 +3,6 @@ package com.benz.norge.patient.visit.api.entity;
 import com.benz.norge.patient.visit.api.db.Schema;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -11,34 +10,33 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "visit",schema = Schema.PATIENT_DB)
-@Document(collection = "visit")
+@Table(name = "VISIT",schema = Schema.PATIENT_DB)
 @Getter
 @Setter
 public class Visit {
 
     @Id
-    @Column(name = "visited_id")
+    @Column(name = "VISITED_ID")
     private String visitedId;
-    @Column(name = "reason",nullable = false)
+    @Column(name = "REASON",nullable = false)
     private String reason;
-    @Column(name = "visit_date_time",nullable = false)
+    @Column(name = "VISIT_DATE_TIME",nullable = false)
     private String visitDateTime;
-    @Column(name = "created_by",nullable = false)
+    @Column(name = "CREATED_BY",nullable = false)
     private String createdBy;
-    @Column(name = "modified_by")
+    @Column(name = "MODIFIED_BY")
     private String modifiedBy;
-    @Column(name = "created_date_time",nullable = false)
+    @Column(name = "CREATED_DATE_TIME",nullable = false)
     private LocalDateTime createdDateTime;
-    @Column(name = "modified_date_time")
+    @Column(name = "MODIFIED_DATE_TIME")
     private LocalDateTime modifiedDateTime;
 
     @ManyToOne(targetEntity = Physician.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "reg_no",referencedColumnName = "reg_no")
+    @JoinColumn(name = "REG_NO",referencedColumnName = "REG_NO")
     private Physician physician;
 
     @ManyToOne(targetEntity = Patient.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "patient_id",referencedColumnName = "patient_id")
+    @JoinColumn(name = "PATIENT_ID",referencedColumnName = "PATIENT_ID")
     private Patient patient;
 
 }

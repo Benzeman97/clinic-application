@@ -1,7 +1,6 @@
 package com.benz.norge.patient.visit.api.service.impl;
 
 import com.benz.norge.patient.visit.api.dao.PatientDao;
-import com.benz.norge.patient.visit.api.repository.PatientMongoDao;
 import com.benz.norge.patient.visit.api.entity.Patient;
 import com.benz.norge.patient.visit.api.exception.DataNotFoundException;
 import com.benz.norge.patient.visit.api.exception.ExistedException;
@@ -19,15 +18,11 @@ import java.util.Objects;
 @Service
 public class PatientServiceImpl implements PatientService {
 
+    private PatientDao patientDao;
     final private static Logger LOGGER = LogManager.getLogger(PatientServiceImpl.class);
 
-
-    private PatientDao patientDao;
-    private PatientMongoDao patientMongoDao;
-
-    public PatientServiceImpl(PatientDao patientDao,PatientMongoDao patientMongoDao){
+    public PatientServiceImpl(PatientDao patientDao){
         this.patientDao=patientDao;
-        this.patientMongoDao=patientMongoDao;
     }
 
     @Override

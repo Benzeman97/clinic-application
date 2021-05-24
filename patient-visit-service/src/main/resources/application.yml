@@ -6,4 +6,3 @@ spring:
     name: patient-visit-service
   profiles:
     active: dev
-    include: mysql

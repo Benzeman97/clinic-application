@@ -1,9 +1,7 @@
 package com.benz.norge.patient.visit.api.service.impl;
 
 import com.benz.norge.patient.visit.api.dao.HolidayDao;
-import com.benz.norge.patient.visit.api.repository.HolidayMongoDao;
 import com.benz.norge.patient.visit.api.dao.VisitDao;
-import com.benz.norge.patient.visit.api.repository.VisitMongoDao;
 import com.benz.norge.patient.visit.api.entity.Holiday;
 import com.benz.norge.patient.visit.api.entity.Visit;
 import com.benz.norge.patient.visit.api.exception.DataNotFoundException;
@@ -34,19 +32,14 @@ public class VisitServiceImpl implements VisitService {
     private VisitDao visitDao;
     private HolidayDao holidayDao;
     private RestTemplate restTemplate;
-    private HolidayMongoDao holidayMongoDao;
-    private VisitMongoDao visitMongoDao;
 
     @Value("${billing.service.url}")
     private String url;
 
-    public VisitServiceImpl(VisitDao visitDao,HolidayDao holidayDao,RestTemplate restTemplate,HolidayMongoDao holidayMongoDao,
-                            VisitMongoDao visitMongoDao){
+    public VisitServiceImpl(VisitDao visitDao,HolidayDao holidayDao,RestTemplate restTemplate){
         this.visitDao=visitDao;
         this.holidayDao=holidayDao;
         this.restTemplate=restTemplate;
-        this.holidayMongoDao=holidayMongoDao;
-        this.visitMongoDao=visitMongoDao;
     }
 
     @Override

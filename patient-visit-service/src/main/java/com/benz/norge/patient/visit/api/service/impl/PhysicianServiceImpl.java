@@ -1,7 +1,6 @@
 package com.benz.norge.patient.visit.api.service.impl;
 
 import com.benz.norge.patient.visit.api.dao.PhysicianDao;
-import com.benz.norge.patient.visit.api.repository.PhysicianMongoDao;
 import com.benz.norge.patient.visit.api.entity.Physician;
 import com.benz.norge.patient.visit.api.exception.DataNotFoundException;
 import com.benz.norge.patient.visit.api.exception.ExistedException;
@@ -22,11 +21,9 @@ public class PhysicianServiceImpl implements PhysicianService {
     final private static Logger LOGGER = LogManager.getLogger(PhysicianServiceImpl.class);
 
     private PhysicianDao physicianDao;
-    private PhysicianMongoDao physicianMongoDao;
 
-    public PhysicianServiceImpl(PhysicianDao physicianDao,PhysicianMongoDao physicianMongoDao){
+    public PhysicianServiceImpl(PhysicianDao physicianDao){
         this.physicianDao=physicianDao;
-        this.physicianMongoDao=physicianMongoDao;
     }
 
     @Override

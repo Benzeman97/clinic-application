@@ -3,32 +3,31 @@ package com.benz.norge.patient.visit.api.entity;
 import com.benz.norge.patient.visit.api.db.Schema;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "patient",schema = Schema.PATIENT_DB)
-@Document(collection = "patient")
+@Table(name = "PATIENT",schema = Schema.PATIENT_DB)
 @Getter
 @Setter
 public class Patient {
 
     @Id
-    @Column(name = "patient_id")
+    @Column(name = "PATIENT_ID")
     private String patientId;
-    @Column(name = "patient_name",nullable = false)
+    @Column(name = "PATIENT_NAME",nullable = false)
     private String patientName;
-    @Column(name = "gender",nullable = false)
+    @Column(name = "GENDER",nullable = false)
     private String gender;
-    @Column(name = "age",nullable = false)
+    @Column(name = "AGE",nullable = false)
     private int age;
-    @Column(name = "created_by",nullable = false)
+    @Column(name = "CREATED_BY",nullable = false)
     private String createdBy;
-    @Column(name = "created_date_time")
+    @Column(name = "CREATED_DATE_TIME")
     private LocalDateTime createdDateTime;
-    @Column(name = "modified_date_time")
+    @Column(name = "MODIFIED_DATE_TIME")
     private LocalDateTime modifiedDateTime;
 
    /* bi-directional

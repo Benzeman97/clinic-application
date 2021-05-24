@@ -4,7 +4,6 @@ package com.benz.norge.patient.visit.api.entity;
 import com.benz.norge.patient.visit.api.db.Schema;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,24 +12,23 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "holiday",schema = Schema.PATIENT_DB)
-@Document(collection = "holiday")
+@Table(name = "HOLIDAY",schema = Schema.PATIENT_DB)
 @Getter
 @Setter
 public class Holiday {
 
     @Id
-    @Column(name = "holiday_date")
+    @Column(name = "HOLIDAY_DATE")
     private String holidayDate;
-    @Column(name = "holiday_name",nullable = false)
+    @Column(name = "HOLIDAY_NAME",nullable = false)
     private String holidayName;
-    @Column(name = "created_by",nullable = false)
+    @Column(name = "CREATED_BY",nullable = false)
     private String createdBy;
-    @Column(name = "modified_by")
+    @Column(name = "MODIFIED_BY")
     private String modifiedBy;
-    @Column(name = "created_date_time",nullable = false)
+    @Column(name = "CREATED_DATE_TIME",nullable = false)
     private LocalDateTime createdDateTime;
-    @Column(name = "modified_date_time")
+    @Column(name = "MODIFIED_DATE_TIME")
     private LocalDateTime modifiedDateTime;
 
 }
