@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  patient-service:
+    image: patient-service:1.0
+    container_name: patient-service
+    ports:
+    - 9090:9090
+    restart: on-failure
+    networks:
+      - patient-mysql
+    depends_on:
+      - mysql-db
+    links:
+      - mysql-db
+  mysql-db:
+    image: mysql-db:1.0
+    container_name: mysql-db
+    ports:
+    - 3306:3306
+    networks:
+      - patient-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD = *****
+      - MYSQL_DATABASE = patient_db
+      - MYSQL_USER =  patient_db
+
+networks:
+  patient-mysql:
