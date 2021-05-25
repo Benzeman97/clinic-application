@@ -7,15 +7,17 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Entity
 @Table(name = "billing",schema = Schema.BILLING_DB)
+@Document(collection = "billing")
 @Getter
 @Setter
 public class Billing {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
     @Column(name = "billed_date_time",nullable = false)

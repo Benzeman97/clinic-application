@@ -21,9 +21,8 @@ services:
     networks:
       - billing-mysql
     environment:
-      - MYSQL_ROOT_PASSWORD = *****
-      - MYSQL_DATABASE = billing_db
-      - MYSQL_USER = patient_db
+      - MYSQL_ROOT_PASSWORD = 14292
+      - MYSQL_USER = root
 
 networks:
   - billing-mysql
