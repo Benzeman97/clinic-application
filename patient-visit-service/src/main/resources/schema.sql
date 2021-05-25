@@ -1,3 +1,12 @@
+create user 'patient_db'@'%' identified by '14292';
+
+grant all privileges on *.* to 'patient_db'@'%';
+
+flush privileges;
+
+create database patient_db;
+
+use patient_db;
 
 create table if not exists holiday(holiday_date varchar(100),holiday_name varchar(100),created_by varchar(100),
 modified_by varchar(100),created_date_time timestamp,modified_date_time timestamp,constraint pk_date_holiday primary key(holiday_date));

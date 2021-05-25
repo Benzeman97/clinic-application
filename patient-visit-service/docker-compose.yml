@@ -14,16 +14,15 @@ services:
     links:
       - mysql-db
   mysql-db:
-    image: mysql-db:1.0
+    image: mysql:8
     container_name: mysql-db
     ports:
     - 3306:3306
     networks:
       - patient-mysql
     environment:
-      - MYSQL_ROOT_PASSWORD = *****
-      - MYSQL_DATABASE = patient_db
-      - MYSQL_USER =  patient_db
+      - MYSQL_ROOT_PASSWORD=14292
+      - MYSQL_USER=root
 
 networks:
   patient-mysql:
