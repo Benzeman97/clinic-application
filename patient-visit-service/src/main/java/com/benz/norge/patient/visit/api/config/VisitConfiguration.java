@@ -11,4 +11,5 @@ public class VisitConfiguration {
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }
+
 }
