@@ -10,6 +10,7 @@ services:
     networks:
       - patient-mysql
       - patient-mongo
+      - patient-billing
     depends_on:
       - mysql-db
       - mongo-db
@@ -47,6 +48,7 @@ services:
 networks:
   patient-mysql:
   patient-mongo:
+  patient-billing:
   
 volumes:
   mysqldata:

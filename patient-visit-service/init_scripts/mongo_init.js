@@ -1,5 +1,5 @@
  
- var db = connect("mongodb://admin:14292@127.0.0.1:27017/admin");
+ var db = connect("mongodb://admin:14292@mongo-db/admin");
 
 db = db.getSiblingDB('patient_db'); /* 'use' statement doesn't support here to switch db */
 
