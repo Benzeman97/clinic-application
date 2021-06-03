@@ -8,21 +8,22 @@ services:
     - 9091:9091
     restart: on-failure
     networks:
-      - billing-mysql
+      - patient-visit-service_patient-mysql
+      - patient-visit-service_patient-mongo
+      - patient-visit-service_patient-billing
     depends_on:
       - mysql-db
+      - mongo-db
     links:
       - mysql-db
-  mysql-db:
-    image: mysql-db:8
-    container_name: mysql-db
-    ports:
-    - 3306:3306
-    networks:
-      - billing-mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD = 14292
-      - MYSQL_USER = root
-
+      - mongo-db
+  
+    
 networks:
-  - billing-mysql
+   patient-visit-service_patient-mysql:
+        external: true
+   patient-visit-service_patient-mongo:
+        external: true   
+   patient-visit-service_patient-billing:
+        external: true
+   
